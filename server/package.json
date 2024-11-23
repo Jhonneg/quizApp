@@ -1,0 +1,18 @@
+{
+  "name": "pantry-proxy-api",
+  "version": "1.0.0",
+  "description": "Pantry API",
+  "main": "server.js",
+  "scripts": {
+    "dev": "node --watch --env-file=.env server.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "jhonneg",
+  "license": "ISC",
+  "dependencies": {
+    "cors": "^2.8.5",
+    "express": "^4.21.1",
+    "morgan": "^1.10.0",
+    "path": "^0.12.7"
+  }
+}
