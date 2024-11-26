@@ -113,6 +113,13 @@ function checkAnswer(selectedAnswer, correctAnswer) {
     }
     choice.disabled = true;
   });
+
+  if (selectedAnswer === correctAnswer) {
+    const elapsedTime = Date.now() - startTime;
+    const timeLeft = totalTime - elapsedTime;
+    const weighedScore = Math.floor((timeLeft / totalTime) * 1000);
+    totalScore += weighedScore;
+  }
   nextBtn.disabled = false;
 }
 
