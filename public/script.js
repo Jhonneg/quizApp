@@ -15,6 +15,10 @@ const playAgainBtn = document.querySelector("#play-again-btn");
 
 let currentQuestion = 0;
 let questions = [];
+let totalScore = 0;
+let timerInterval;
+let startTime;
+const totalTime = 10000;
 
 (async () => {
   try {
@@ -49,6 +53,8 @@ function loadQuestion() {
     button.onclick = () => checkAnswer(choice, question.correct_answer.trim());
     choicesContainer.appendChild(button);
   });
+  resetTimer();
+  startTimer();
 }
 
 nextBtn.addEventListener("click", () => {
@@ -60,6 +66,36 @@ function decodeHTML(html) {
   const txt = document.createElement("div");
   txt.innerHTML = html;
   return txt.textContent;
+}
+
+function startTimer() {
+  startTime = Date.now();
+  let timeLeft = totalTime;
+  updateTimerDisplay(timeLeft);
+
+  timerInterval = setInterval(() => {
+    const elapsedTime = Date.now() - startTime;
+    timeLeft = totalTime - elapsedTime;
+
+    if (timeLeft <= 0) {
+      clearInterval(timerInterval);
+      timeLeft = 0;
+      updateTimerDisplay(timeLeft);
+      nextBtn.disabled = false;
+    } else {
+      updateTimerDisplay(timeLeft);
+    }
+  }, 50);
+}
+
+function resetTimer() {
+  clearInterval(timerInterval);
+  updateTimerDisplay(totalTime);
+}
+
+function updateTimerDisplay(timeLeft) {
+  const seconds = (timeLeft / 1000).toFixed(2);
+  timerDisplay.innerText = seconds;
 }
 
 function checkAnswer(selectedAnswer, correctAnswer) {
