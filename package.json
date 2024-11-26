@@ -4,7 +4,8 @@
   "description": "Pantry API",
   "main": "server.js",
   "scripts": {
-    "start": "node --watch --env-file=.env server.js",
+    "dev": "node --watch --env-file=.env server.js",
+    "start": "node server.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "jhonneg",
