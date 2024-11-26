@@ -64,6 +64,9 @@ h2 {
     background-color: red;
     color: white;
   }
+  &:disabled {
+    cursor: default;
+  }
 }
 
 .btn {
@@ -78,6 +81,11 @@ h2 {
   &:hover {
     background-color: #0056b3;
     transition: background-color 0.3s;
+  }
+  &:disabled {
+    background-color: #ccc;
+    color: #333;
+    cursor: not-allowed;
   }
 }
 
