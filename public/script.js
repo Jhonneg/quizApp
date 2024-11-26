@@ -81,7 +81,10 @@ function startTimer() {
       clearInterval(timerInterval);
       timeLeft = 0;
       updateTimerDisplay(timeLeft);
+      disableChoices();
       nextBtn.disabled = false;
+      const correctAnswer = questions[currentQuestion].correct_answer;
+      highlightCorrectAnswer(correctAnswer);
     } else {
       updateTimerDisplay(timeLeft);
     }
@@ -99,6 +102,7 @@ function updateTimerDisplay(timeLeft) {
 }
 
 function checkAnswer(selectedAnswer, correctAnswer) {
+  clearInterval(timerInterval);
   console.log(selectedAnswer, correctAnswer);
   const choices = document.querySelectorAll(".choice");
   choices.forEach((choice) => {
@@ -110,4 +114,20 @@ function checkAnswer(selectedAnswer, correctAnswer) {
     choice.disabled = true;
   });
   nextBtn.disabled = false;
+}
+
+function disableChoices() {
+  const choices = document.querySelectorAll(".choice");
+  choices.forEach((choice) => {
+    choice.disabled = true;
+  });
+}
+
+function highlightCorrectAnswer(correctAnswer) {
+  const choices = document.querySelectorAll(".choice");
+  choices.forEach((choice) => {
+    if (choice.innerText === decodeHTML(correctAnswer)) {
+      choice.classList.add("correct");
+    }
+  });
 }
