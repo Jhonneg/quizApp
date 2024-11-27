@@ -13,7 +13,7 @@ const highScoreContainer = document.querySelector("#high-score-container");
 const highScoreList = document.querySelector("#high-scores-list");
 const playAgainBtn = document.querySelector("#play-again-btn");
 
-let currentQuestion = 9;
+let currentQuestion = 0;
 let questions = [];
 let totalScore = 0;
 let timerInterval;
@@ -172,4 +172,41 @@ async function saveHighScore() {
   } catch (error) {
     console.error("Error saving high score: ", error);
   }
+  displayHighScores(newScore);
 }
+
+function displayHighScores(newScore) {
+  highScoreList.innerText = "";
+
+  highScores.forEach((score, index) => {
+    const row = document.createElement("tr");
+
+    const nameCell = document.createElement("td");
+    nameCell.innerText = score.name;
+
+    const scoreCell = document.createElement("td");
+    scoreCell.innerText = score.score;
+
+    const dateCell = document.createElement("td");
+    dateCell.innerText = score.date;
+
+    row.appendChild(nameCell);
+    row.appendChild(scoreCell);
+    row.appendChild(dateCell);
+
+    if (
+      score.name === newScore.name &&
+      score.score === newScore.score &&
+      score.date === newScore.date
+    ) {
+      row.classList.add("highlight");
+    }
+    highScoreList.appendChild(row);
+  });
+  loader.style.display = "none";
+  highScoreContainer.style.display = "flex";
+}
+
+playAgainBtn.addEventListener("click", () => {
+  window.location.reload();
+});
